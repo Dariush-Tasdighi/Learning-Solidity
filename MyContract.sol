@@ -163,8 +163,8 @@ pragma solidity 0.8.19;
 // contract MyContract {
 //     uint256 public value = 10;
 
-//     function setValue(uint256 _value) public {
-//         value = _value;
+//     function setValue(uint256 value_) public {
+//         value = value_;
 //     }
 // }
 // **************************************************
@@ -175,8 +175,8 @@ pragma solidity 0.8.19;
 // contract MyContract {
 //     uint256 private value = 10;
 
-//     function setValue(uint256 _value) public {
-//         value = _value;
+//     function setValue(uint256 value_) public {
+//         value = value_;
 //     }
 
 //     function getValue() public view returns (uint256) {
@@ -196,8 +196,8 @@ pragma solidity 0.8.19;
 
 //     uint256 private value;
 
-//     function setValue(uint256 _value) public {
-//         value = _value;
+//     function setValue(uint256 value_) public {
+//         value = value_;
 //     }
 
 //     function getValue() public view returns (uint256) {
@@ -210,14 +210,14 @@ pragma solidity 0.8.19;
 // Learning: Constructor with parameter(s)
 // **************************************************
 // contract MyContract {
-//     constructor(uint256 _value) {
-//         value = _value;
+//     constructor(uint256 value_) {
+//         value = value_;
 //     }
 
 //     uint256 private value;
 
-//     function setValue(uint256 _value) public {
-//         value = _value;
+//     function setValue(uint256 value_) public {
+//         value = value_;
 //     }
 
 //     function getValue() public view returns (uint256) {
@@ -249,8 +249,8 @@ pragma solidity 0.8.19;
 //     address private owner;
 //     uint256 private value;
 
-//     function setValue(uint256 _value) public {
-//         value = _value;
+//     function setValue(uint256 value_) public {
+//         value = value_;
 //     }
 
 //     function getValue() public view returns (uint256) {
@@ -275,9 +275,9 @@ pragma solidity 0.8.19;
 //     uint256 public value;
 //     //uint256 private value;
 
-//     function setValue(uint256 _value) public {
+//     function setValue(uint256 value_) public {
 //         if (msg.sender == owner) {
-//             value = _value;
+//             value = value_;
 //         }
 //     }
 // }
@@ -293,9 +293,9 @@ pragma solidity 0.8.19;
 //     address public owner;
 //     uint256 public value;
 
-//     function setValue(uint256 _value) public {
+//     function setValue(uint256 value_) public {
 //         if (msg.sender != owner) {
-//             value = _value;
+//             value = value_;
 //         }
 //         else {
 //             revert("Only owner can modify value!"); // Similar throw command in C#
@@ -314,8 +314,8 @@ pragma solidity 0.8.19;
 //     address public owner;
 //     uint256 public value;
 
-//     function setValue(uint256 _value) public {
-//         value = _value;
+//     function setValue(uint256 value_) public {
+//         value = value_;
 
 //         if (msg.sender != owner) {
 //             revert("Only owner can modify value!");
@@ -334,13 +334,13 @@ pragma solidity 0.8.19;
 //     address public owner;
 //     uint256 public value;
 
-//     function setValue(uint256 _value) public {
+//     function setValue(uint256 value_) public {
 //         if (msg.sender != owner) {
 //             revert("Only owner can modify value!");
 //             // return; // Does not need this command!
 //         }
 
-//         value = _value;
+//         value = value_;
 //     }
 // }
 // **************************************************
@@ -357,12 +357,12 @@ pragma solidity 0.8.19;
 
 //     error OnlyOwner();
 
-//     function setValue(uint256 _value) public {
+//     function setValue(uint256 value_) public {
 //         if (msg.sender != owner) {
 //             revert OnlyOwner();
 //         }
 
-//         value = _value;
+//         value = value_;
 //     }
 // }
 // **************************************************
@@ -379,12 +379,12 @@ pragma solidity 0.8.19;
 
 //     error OnlyOwner(string);
 
-//     function setValue(uint256 _value) public {
+//     function setValue(uint256 value_) public {
 //         if (msg.sender != owner) {
 //             revert OnlyOwner("Only owner can modify value!");
 //         }
 
-//         value = _value;
+//         value = value_;
 //     }
 // }
 // **************************************************
@@ -399,14 +399,15 @@ pragma solidity 0.8.19;
 //     address public owner;
 //     uint256 public value;
 
+//     // Note: Error Definition should be in Pascal Case
 //     error OnlyOwner(string, address, address);
 
-//     function setValue(uint256 _value) public {
+//     function setValue(uint256 value_) public {
 //         if (msg.sender != owner) {
 //             revert OnlyOwner("Only owner can modify value!", owner, msg.sender);
 //         }
 
-//         value = _value;
+//         value = value_;
 //     }
 // }
 // **************************************************
@@ -422,10 +423,10 @@ pragma solidity 0.8.19;
 //     address public immutable owner; // immutable -> Read Only
 
 //     // require(...)
-//     function setValue(uint256 _value) public {
+//     function setValue(uint256 value_) public {
 //         require(msg.sender == owner);
 
-//         value = _value;
+//         value = value_;
 //     }
 // }
 // **************************************************
@@ -440,10 +441,10 @@ pragma solidity 0.8.19;
 //     uint256 public value;
 //     address public immutable owner;
 
-//     function setValue(uint256 _value) public {
+//     function setValue(uint256 value_) public {
 //         require(msg.sender == owner, "Only owner can modify value!"); // Display your error message!
 
-//         value = _value;
+//         value = value_;
 //     }
 // }
 // **************************************************
@@ -458,14 +459,123 @@ pragma solidity 0.8.19;
 //     uint256 public value;
 //     address public immutable owner;
 
-//     // modifier
-//     modifier OnlyOwner() {
+//     Note: Modifier Definition should be in Camel Case!
+//     modifier onlyOwner() {
 //         require(msg.sender == owner, "Only owner can modify value!");
 //         _;
 //     }
 
-//     function setValue(uint256 _value) public OnlyOwner {
-//         value = _value;
+//     function setValue(uint256 value_) public onlyOwner {
+//         value = value_;
+//     }
+// }
+// **************************************************
+
+// **************************************************
+// Clear Cache: CTRL + SHIFT + i -> 
+// **************************************************
+
+// **************************************************
+// contract MyContract {
+//     constructor() {
+//         value = 10;
+//         enabled = false;
+//         ownerAddress = msg.sender;
+//     }
+
+//     bool public enabled;
+//     uint256 public value;
+//     address public ownerAddress;
+//     // address public immutable ownerAddress;
+
+//     modifier isEnabled() {
+//         require(enabled == true, "This contract is not enable anymore!");
+//         _;
+//     }
+
+//     modifier onlyOwner() {
+//         require(msg.sender == ownerAddress, "Only owner can modify value!");
+//         _;
+//     }
+
+//     function enable() public onlyOwner {
+//         enabled = true;
+//     }
+
+//     function disable() public onlyOwner {
+//         enabled = false;
+//     }
+
+//     // _newOwnerAddress -> newOwnerAddress
+//     function transferOwner(address newOwnerAddress) public onlyOwner {
+//         ownerAddress = newOwnerAddress;
+//     }
+
+//     // value & _value => value_
+//     // function setValue(uint256 value_) public onlyOwner isEnabled {
+//     //     value = value_;
+//     // }
+
+//     function setValue(uint256 newValue) public onlyOwner isEnabled {
+//         value = newValue;
+//     }
+
+//     function plus(uint256 a, uint256 b) public view isEnabled returns (uint256) {
+//         return a + b;
+//     }
+
+//     // function plus(uint256 a, uint256 b) external view isEnabled() returns(uint256) {
+//     //     return a + b;
+//     // }
+// }
+// **************************************************
+
+// **************************************************
+// abstract contract BaseContract {
+//     constructor() {
+//         enabled = false;
+//         ownerAddress = msg.sender;
+//     }
+
+//     bool public enabled;
+//     address public ownerAddress;
+
+//     modifier isEnabled() {
+//         require(enabled == true, "This contract is not enable anymore!");
+//         _;
+//     }
+
+//     modifier onlyOwner() {
+//         require(msg.sender == ownerAddress, "Only owner can modify value!");
+//         _;
+//     }
+
+//     function enable() public onlyOwner {
+//         enabled = true;
+//     }
+
+//     function disable() public onlyOwner {
+//         enabled = false;
+//     }
+
+//     function transferOwner(address newOwnerAddress) public onlyOwner {
+//         ownerAddress = newOwnerAddress;
+//     }
+// }
+
+// contract MyContract is BaseContract {
+//     constructor() {
+//         value = 10;
+//     }
+
+//     uint256 public value;
+
+//     function setValue(uint256 newValue) public onlyOwner isEnabled {
+//         value = newValue;
+//     }
+
+//     function plus(uint256 a, uint256 b) public view isEnabled returns (uint256) {
+//         return a + b;
 //     }
 // }
 // **************************************************
