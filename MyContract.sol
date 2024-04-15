@@ -525,6 +525,8 @@ pragma solidity 0.8.19;
 //         return a + b;
 //     }
 
+//     // تابع فوق، بهتر بود که به شکل ذیل نوشته شود
+//     // ولی هنوز نکات آن‌را یاد نگرفته‌ایم، لذا به همان شکل فوق، از آن استفاده می‌کنیم
 //     // function plus(uint256 a, uint256 b) external view isEnabled() returns(uint256) {
 //     //     return a + b;
 //     // }
@@ -575,7 +577,7 @@ contract MyContract is BaseContract {
         value = newValue;
     }
 
-    function plus(uint256 a, uint256 b) public view isEnabled returns (uint256) {
+    function plus(uint256 a, uint256 b) external view isEnabled returns (uint256) {
         return a + b;
     }
 }
