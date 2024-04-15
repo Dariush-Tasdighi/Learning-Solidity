@@ -472,7 +472,7 @@ pragma solidity 0.8.19;
 // **************************************************
 
 // **************************************************
-// Clear Cache: CTRL + SHIFT + i -> 
+// Clear Cache -> Inspect -> CTRL + SHIFT + i
 // **************************************************
 
 // **************************************************
@@ -488,13 +488,14 @@ pragma solidity 0.8.19;
 //     address public ownerAddress;
 //     // address public immutable ownerAddress;
 
+//     // Note: modifiers should be in camelCase!
 //     modifier isEnabled() {
-//         require(enabled == true, "This contract is not enable anymore!");
+//         require(enabled == true, "This contract is not enabled anymore!");
 //         _;
 //     }
 
 //     modifier onlyOwner() {
-//         require(msg.sender == ownerAddress, "Only owner can modify value!");
+//         require(msg.sender == ownerAddress, "Only owner can call this function!");
 //         _;
 //     }
 
@@ -506,7 +507,7 @@ pragma solidity 0.8.19;
 //         enabled = false;
 //     }
 
-//     // _newOwnerAddress -> newOwnerAddress
+//     // _ownerAddress -> ownerAddress_ -> newOwnerAddress
 //     function transferOwner(address newOwnerAddress) public onlyOwner {
 //         ownerAddress = newOwnerAddress;
 //     }
@@ -531,51 +532,51 @@ pragma solidity 0.8.19;
 // **************************************************
 
 // **************************************************
-// abstract contract BaseContract {
-//     constructor() {
-//         enabled = false;
-//         ownerAddress = msg.sender;
-//     }
+abstract contract BaseContract {
+    constructor() {
+        enabled = false;
+        ownerAddress = msg.sender;
+    }
 
-//     bool public enabled;
-//     address public ownerAddress;
+    bool public enabled;
+    address public ownerAddress;
 
-//     modifier isEnabled() {
-//         require(enabled == true, "This contract is not enable anymore!");
-//         _;
-//     }
+    modifier isEnabled() {
+        require(enabled == true, "This contract is not enabled anymore!");
+        _;
+    }
 
-//     modifier onlyOwner() {
-//         require(msg.sender == ownerAddress, "Only owner can modify value!");
-//         _;
-//     }
+    modifier onlyOwner() {
+        require(msg.sender == ownerAddress, "Only owner can call this function!");
+        _;
+    }
 
-//     function enable() public onlyOwner {
-//         enabled = true;
-//     }
+    function enable() public onlyOwner {
+        enabled = true;
+    }
 
-//     function disable() public onlyOwner {
-//         enabled = false;
-//     }
+    function disable() public onlyOwner {
+        enabled = false;
+    }
 
-//     function transferOwner(address newOwnerAddress) public onlyOwner {
-//         ownerAddress = newOwnerAddress;
-//     }
-// }
+    function transferOwner(address newOwnerAddress) public onlyOwner {
+        ownerAddress = newOwnerAddress;
+    }
+}
 
-// contract MyContract is BaseContract {
-//     constructor() {
-//         value = 10;
-//     }
+contract MyContract is BaseContract {
+    constructor() {
+        value = 10;
+    }
 
-//     uint256 public value;
+    uint256 public value;
 
-//     function setValue(uint256 newValue) public onlyOwner isEnabled {
-//         value = newValue;
-//     }
+    function setValue(uint256 newValue) public onlyOwner isEnabled {
+        value = newValue;
+    }
 
-//     function plus(uint256 a, uint256 b) public view isEnabled returns (uint256) {
-//         return a + b;
-//     }
-// }
+    function plus(uint256 a, uint256 b) public view isEnabled returns (uint256) {
+        return a + b;
+    }
+}
 // **************************************************
