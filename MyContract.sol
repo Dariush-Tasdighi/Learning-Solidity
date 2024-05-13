@@ -459,7 +459,7 @@ pragma solidity 0.8.19;
 //     uint256 public value;
 //     address public immutable owner;
 
-//     Note: Modifier Definition should be in Camel Case!
+//     // Note: Modifier Definition should be in Camel Case!
 //     modifier onlyOwner() {
 //         require(msg.sender == owner, "Only owner can modify value!");
 //         _;
